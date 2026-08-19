@@ -132,4 +132,45 @@ processflow> exit
 [01m[Kexec.c:9:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kpid1[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
     9 |     pid_t pid, [01;35m[Kpid1[m[K;
       |                [01;35m[K^~~~[m[K
-[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;3
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ mae[Kke clean
+[?2004lrm -f processflow *.o
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c -o processflow
+[01m[Kmain.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[Kmain.c:10:26:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kargv[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   10 | int main(int argc, [01;35m[Kchar *argv[][m[K){ // argc é a quantidade de argumentos, argv é um array de string com os argumentos em si
+      |                    [01;35m[K~~~~~~^~~~~~[m[K
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make cea[K[K[K[K
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c -o processflow
+[01m[Kmain.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[Kmain.c:10:26:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kargv[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   10 | int main(int argc, [01;35m[Kchar *argv[][m[K){ // argc é a quantidade de argumentos, argv é um array de string com os argumentos em si
+      |                    [01;35m[K~~~~~~^~~~~~[m[K
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make clean[K clean./processflow
+[?2004lprocessflow> task a sleep 2
+processflow> task b sleep 1
+processflow> run parallel a b
+processflow> task listar /bin/ls
+processflow> task contar /usr/bin/wc
+processflow> run sequential lisyar  t  tar contar
+'Aula Prática'	 Enunciado   evidencias.log   exec.c   exec.h   main   main.c   Makefile   processflow	 README.md   task.c   task.h
+e 
+exit
+^C
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow
+[?2004lprocessflow> run     t task contar /usr. /bin/wx c
+processflow> run sequ      seuqe     contar
+Quantidade de argumentos insuficiente
+processflow> run sequential contar
+teste
+      1       1       6
+processflow> exit
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow
+[?2004lprocessflow> task a sleep 10
+processflow> task b sleep 10
+processflow> run parallel a b
+processflow> exit
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ eci[K[Kxit
+[?2004lexit
+
+Script done on 2026-08-19 20:25:04-03:00 [COMMAND_EXIT_CODE="0"]
