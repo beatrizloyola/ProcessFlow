@@ -18,7 +18,7 @@
 
 - [X] Definir struct `Task` com nome, programa e array de argumentos
 - [X] Implementar array/lista de tarefas cadastradas
-- [ ] Implementar comando `task <nome> <programa> [args...]` populando a struct
+- [X] Implementar comando `task <nome> <programa> [args...]` populando a struct
 - [X] Implementar busca de tarefa por nome (retorna NULL se não existir)
 - [ ] Ao tentar executar tarefa inexistente: imprimir erro e continuar
 
