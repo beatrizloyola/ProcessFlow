@@ -26,3 +26,22 @@ void spawn(Task *t){
 
     return;
 }
+
+pid_t spawn_async(Task *t){
+    pid_t pid;
+
+    pid = fork(); /* Fork cria uma duplicata do processo original.
+    Se der certo, o pai retorna o id do filho e o filho retorna 0.
+    Se der errado, o pai retorna -1 e o filho não é criado. */
+
+    if (pid < 0) { // Se der errado
+        fprintf(stderr, "Erro no fork\n");
+        return -1;
+    } else if (pid == 0) { // Só o filho pode executar esse bloco
+        if(execvp(t->programa, t->argumentos) == -1){ // Susbtitui a imagem do processo filho pelo programa
+            fprintf(stderr, "Erro ao executar o programa\n");
+            exit(1); // Mata o filho pra evitar processo zumbi
+        } 
+    }
+    return pid;
+}

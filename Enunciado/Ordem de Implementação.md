@@ -37,9 +37,9 @@
 ## 🔗 Fase 4 — Sequencial + Paralelo
 
 - [X] Estender `run sequential` para N tarefas: chamar `spawn()` em loop, aguardando cada filho antes do próximo
-- [ ] Implementar `run parallel`: fazer todos os `fork()` antes de qualquer `wait()`
-- [ ] Coletar filhos paralelos em loop de `waitpid()` até todos terminarem (sem assumir ordem)
-- [ ] Testar filhos terminando em ordens diferentes (ex.: `sleep 2` e `sleep 1` em paralelo)
+- [X] Implementar `run parallel`: fazer todos os `fork()` antes de qualquer `wait()`
+- [X] Coletar filhos paralelos em loop de `waitpid()` até todos terminarem (sem assumir ordem)
+- [X] Testar filhos terminando em ordens diferentes (ex.: `sleep 2` e `sleep 1` em paralelo)
 
 ---
 

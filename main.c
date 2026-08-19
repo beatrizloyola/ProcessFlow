@@ -71,6 +71,22 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                             spawn(task);
                         }
                     }
+                } if (strcmp(args[1], "parallel") == 0){
+                    pid_t pids[64];
+                    int n = 0;
+                    for (int i = 2; i < argc_line; i++){ // Cria todos os filhos sem esperar o anterior terminar
+                        Task *task = encontrar_task(args[i]);
+                        if (task == NULL){
+                            continue;
+                        } else {
+                            pids[n++] = spawn_async(task);
+                        }
+                    }
+                    for (int i = 0; i < n; i++){ // Espera cada um dos filhos
+                        if (pids[i] > 0){
+                            waitpid(pids[i], NULL, 0);
+                        }
+                    }
                 }
             }
         }
