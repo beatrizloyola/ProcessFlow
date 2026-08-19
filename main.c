@@ -63,11 +63,13 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                     continue;
                     }
                 if (strcmp(args[1], "sequential") == 0){
-                    Task *task = encontrar_task(args[2]);
-                    if (task == NULL){
-                        continue;
-                    } else {
-                        spawn(task);
+                    for (int i = 2; i < argc_line; i++){
+                        Task *task = encontrar_task(args[i]);
+                        if (task == NULL){
+                            continue;
+                        } else {
+                            spawn(task);
+                        }
                     }
                 }
             }

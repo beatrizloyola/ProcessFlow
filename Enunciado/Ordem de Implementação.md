@@ -20,23 +20,23 @@
 - [X] Implementar array/lista de tarefas cadastradas
 - [X] Implementar comando `task <nome> <programa> [args...]` populando a struct
 - [X] Implementar busca de tarefa por nome (retorna NULL se não existir)
-- [ ] Ao tentar executar tarefa inexistente: imprimir erro e continuar
+- [X] Ao tentar executar tarefa inexistente: imprimir erro e continuar
 
 ---
 
 ## ▶️ Fase 3 — Execução simples
 
-- [ ] Implementar função `spawn(task)`: `fork()` + `execvp()` no filho
-- [ ] No pai: `waitpid()` aguardando o filho
-- [ ] Tratar falha de `execvp()` no filho: imprimir erro e `exit(1)` do filho
-- [ ] Implementar `run sequential <tarefa>` chamando `spawn()` para uma tarefa
-- [ ] Testar: `task listar /bin/ls -l` → `run sequential listar`
+- [X] Implementar função `spawn(task)`: `fork()` + `execvp()` no filho
+- [X] No pai: `waitpid()` aguardando o filho
+- [X] Tratar falha de `execvp()` no filho: imprimir erro e `exit(1)` do filho
+- [X] Implementar `run sequential <tarefa>` chamando `spawn()` para uma tarefa
+- [X] Testar: `task listar /bin/ls -l` → `run sequential listar`
 
 ---
 
 ## 🔗 Fase 4 — Sequencial + Paralelo
 
-- [ ] Estender `run sequential` para N tarefas: chamar `spawn()` em loop, aguardando cada filho antes do próximo
+- [X] Estender `run sequential` para N tarefas: chamar `spawn()` em loop, aguardando cada filho antes do próximo
 - [ ] Implementar `run parallel`: fazer todos os `fork()` antes de qualquer `wait()`
 - [ ] Coletar filhos paralelos em loop de `waitpid()` até todos terminarem (sem assumir ordem)
 - [ ] Testar filhos terminando em ordens diferentes (ex.: `sleep 2` e `sleep 1` em paralelo)
