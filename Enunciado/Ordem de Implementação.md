@@ -4,8 +4,8 @@
 
 ## 🧱 Fase 1 — Esqueleto do programa
 
-- [ ] Criar `main.c` com `main(argc, argv)`
-- [ ] Verificar número de argumentos: 0 → modo interativo, 1 → modo workflow, >1 → erro e encerrar
+- [X] Criar `main.c` com `main(argc, argv)`
+- [X] Verificar número de argumentos: 0 → modo interativo, 1 → modo workflow, >1 → erro e encerrar
 - [ ] Implementar parser de linha: ler linha, tokenizar por espaço, ignorar tokens vazios (trata múltiplos espaços)
 - [ ] Ignorar linha vazia no prompt silenciosamente
 - [ ] Implementar loop interativo: exibir `processflow> `, ler linha, despachar comando
