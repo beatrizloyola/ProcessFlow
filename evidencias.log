@@ -41,4 +41,47 @@ Script started on 2026-08-19 16:07:11-03:00 [TERM="xterm-256color" TTY="/dev/pts
 [?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 
 [?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 
 [?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 
-[?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Document
+[?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 
+[?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 
+[?2004l[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [7mtask listar /bin/ls -l[27mtask listar /bin/ls -l
+[?2004lCommand 'task' not found, but can be installed with:
+sudo snap install task         # version v3.51.1, or
+sudo apt  install taskwarrior  # version 2.6.2+dfsg-1
+See 'snap info task' for additional versions.
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [7mgcc main.c task.c -o processflow[27m
+[7m./processflow[27m
+[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgcc main.c task.c -o processflow
+./processflow
+[A
+[?2004lprocessflow> tas  k listar /bin/ls -l
+processflow> task listar
+Não é possível criar a task
+processflow> task
+Não é possível criar a task
+processflow> exit
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ git cokm[K[Kmmit --ammend [K[K[K[K[Kend -m "Modo Interativo: COmando `[K[K[K[K[K[K[K[Komando `s[Ktask`
+[?2004l[?2004h> "
+[?2004lCommand 'task' not found, but can be installed with:
+sudo snap install task         # version v3.51.1, or
+sudo apt  install taskwarrior  # version 2.6.2+dfsg-1
+See 'snap info task' for additional versions.
+[main 3059b33] Modo Interativo: Comando
+ Date: Wed Aug 19 16:57:09 2026 -0300
+ 4 files changed, 48 insertions(+), 2 deletions(-)
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ git commit --amend -m "Modo Interativo: Comando `task`
+"[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C"
+[?2004lCommand 'task' not found, but can be installed with:
+sudo snap install task         # version v3.51.1, or
+sudo apt  install taskwarrior  # version 2.6.2+dfsg-1
+See 'snap info task' for additional versions.
+[main 822b6dc] Modo Interativo: Comando
+ Date: Wed Aug 19 16:57:09 2026 -0300
+ 4 files changed, 48 insertions(+), 2 deletions(-)
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ git commit --amend -m "Modo Interativo: Comando `task`"[1P`"k`"[C[1P"[1Ptask"
+[?2004l[main 95cd6ef] Modo Interativo: Comando task
+ Date: Wed Aug 19 16:57:09 2026 -0300
+ 4 files changed, 48 insertions(+), 2 deletions(-)
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [?2004l
+exit
+
+Script done on 2026-08-19 18:21:58-03:00 [COMMAND_EXIT_CODE="0"]
