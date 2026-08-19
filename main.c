@@ -41,6 +41,11 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                 token = strtok(NULL, " "); // Passa pro próximo token
             }
             args[argc_line] = NULL; // Acabou token = acabou a lista
+
+            // Comandos
+            if (strcmp(args[0], "exit") == 0){
+                exit(0);
+            }
         }
         
     }
