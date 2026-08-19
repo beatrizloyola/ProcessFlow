@@ -6,7 +6,7 @@
 #include "exec.h"
 
 void spawn(Task *t){
-    pid_t pid, pid1;
+    pid_t pid;
 
     pid = fork(); /* Fork cria uma duplicata do processo original.
     Se der certo, o pai retorna o id do filho e o filho retorna 0.
