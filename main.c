@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include "task.h"
+#include "exec.h"
 
 
 int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é um array de string com os argumentos em si
@@ -47,6 +48,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
             // Comandos
             if (strcmp(args[0], "exit") == 0){
                 exit(0);
+
             } else if (strcmp(args[0], "task") == 0){
                 if (argc_line < 3){
                     fprintf(stderr, "Não é possível criar a task\n");
@@ -54,6 +56,20 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                 }
                 // Nome, programa, ponteiro começando do programa, quantidade de tokens de args[2] até o NULL
                 criar_task(args[1], args[2], &args[2], argc_line - 2);
+
+            } else if (strcmp(args[0], "run") == 0) {
+                if (argc_line < 3){
+                    fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                    continue;
+                    }
+                if (strcmp(args[1], "sequential") == 0){
+                    Task *task = encontrar_task(args[2]);
+                    if (task == NULL){
+                        continue;
+                    } else {
+                        spawn(task);
+                    }
+                }
             }
         }
         

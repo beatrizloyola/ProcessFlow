@@ -22,7 +22,6 @@ void spawn(Task *t){
         } 
     } else if (pid > 0) { // Só o pai pode executar esse bloco
         waitpid(pid, NULL, 0); // Espera o filho acabar
-        printf("Filho terminou\n");
     }
 
     return;
