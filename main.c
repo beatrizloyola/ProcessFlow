@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include "task.h"
 #include "exec.h"
@@ -172,6 +173,7 @@ static void processar_linha (char *buf){
 
 
 int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é um array de string com os argumentos em si
+    signal(SIGCHLD, sigchld_handler);
     if (argc > 2){
         fprintf(stderr, "Erro: Argumentos demais!\n");
         return -1;
