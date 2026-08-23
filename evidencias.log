@@ -366,4 +366,67 @@ processflow> exit
       |                                           [01;35m[Kint[m[K
 In file included from [01m[Kmain.c:3[m[K:
 [01m[K/usr/include/string.h:156:50:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kconst char *[m[K’ but argument is of type ‘[01m[Kint[m[K’
-  156 | extern int strcmp (const char *__s1, [01;36
+  156 | extern int strcmp (const char *__s1, [01;36m[Kconst char *__s2[m[K)
+      |                                      [01;36m[K~~~~~~~~~~~~^~~~[m[K
+[01m[Kmain.c:153:20:[m[K [01;35m[Kwarning: [m[Kargument 2 null where non-null expected [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnonnull-Wnonnull]8;;[m[K]
+  153 |         } else if ([01;35m[Kstrcmp[m[K(args[0], "jobs" == 0)){
+      |                    [01;35m[K^~~~~~[m[K
+[01m[K/usr/include/string.h:156:12:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kstrcmp[m[K’ declared ‘[01m[Knonnull[m[K’
+  156 | extern int [01;36m[Kstrcmp[m[K (const char *__s1, const char *__s2)
+      |            [01;36m[K^~~~~~[m[K
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow
+[?2004lprocessflow> s task longa sleep 10
+processflow> start
+Quantidade de argumentos insuficiente
+processflow> star  t longa
+[1] 40880
+processflow> jobs
+[1] 40880 longa - running
+processflow> wait 10
+processflow> jobs
+[1] 40880 longa - running
+processflow> exti  it
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflowmake[K
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow
+[?2004lprocessflow> ^[[A^[[A        task long  a wait 10
+processflow> start longa
+[1] 41211
+processflow> Erro ao executar o programa
+
+processflow> task long wa  sleep 10
+processflow> start longa
+[2] 41333
+processflow> Erro ao executar o programa
+^C
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow
+[?2004lprocessflow> task longa sleep 10
+processflow> start longa
+[1] 41465
+processflow> jobs
+[1] 41465 longa - running
+processflow> wait   1
+processflow> jobs
+processflow> exot  it
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow
+[?2004lprocessflow> task rapida
+Não é possível criar a task
+processflow> task rapida sleep 1
+processflow> start rapida
+[1] 42639
+processflow> jobs
+[1] 42639 rapida - running
+processflow> jobs
+processflow> 	task 	lista        listar /bin/s ls
+processflow> 
+processflow> 
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow[K[K[K[K[K[K[K[K[K[K[K[K[Kmake
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow
+[?2004lprocessflow> ^C
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow testeNoe[KExit.pf
+[?2004ltask listar /bin/ls[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processo

@@ -100,6 +100,10 @@ void run_pipe(Task *tasks[], int n){
     for (int i = 0; i < n; i++){
         pids[i] = fork();
 
+        if (pids[i] < 0) { // Se der errado
+            fprintf(stderr, "Erro no fork\n");
+        }
+
         // Filho
         if (pids[i] == 0){
             if (i > 0){
