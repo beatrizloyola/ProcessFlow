@@ -45,12 +45,12 @@
 
 ## 🔀 Fase 5 — Pipe
 
-- [ ] Implementar função `run_pipe(tasks[], n)` recebendo array de tarefas
-- [ ] Criar N-1 pipes com `pipe()` antes de qualquer `fork()`
-- [ ] Para cada filho i: `dup2(pipe[i-1][0], STDIN)` e `dup2(pipe[i][1], STDOUT)` conforme posição
-- [ ] Fechar todas as pontas não usadas no filho antes de `exec()`
-- [ ] No pai: fechar todas as pontas dos pipes e aguardar todos os filhos
-- [ ] Testar: `run pipe listar ordenar contar` (ls | sort | wc)
+- [x] Implementar função `run_pipe(tasks[], n)` recebendo array de tarefas
+- [X] Criar N-1 pipes com `pipe()` antes de qualquer `fork()`
+- [X] Para cada filho i: `dup2(pipe[i-1][0], STDIN)` e `dup2(pipe[i][1], STDOUT)` conforme posição
+- [X] Fechar todas as pontas não usadas no filho antes de `exec()`
+- [X] No pai: fechar todas as pontas dos pipes e aguardar todos os filhos
+- [X] Testar: `run pipe listar ordenar contar` (ls | sort | wc)
 
 ---
 

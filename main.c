@@ -45,10 +45,11 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
             }
             args[argc_line] = NULL; // Acabou token = acabou a lista
 
-            // Comandos
+            // Exit
             if (strcmp(args[0], "exit") == 0){
                 exit(0);
 
+            // Task
             } else if (strcmp(args[0], "task") == 0){
                 if (argc_line < 3){
                     fprintf(stderr, "Não é possível criar a task\n");
@@ -57,11 +58,13 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                 // Nome, programa, ponteiro começando do programa, quantidade de tokens de args[2] até o NULL
                 criar_task(args[1], args[2], &args[2], argc_line - 2);
 
+            // Run
             } else if (strcmp(args[0], "run") == 0) {
                 if (argc_line < 3){
                     fprintf(stderr, "Quantidade de argumentos insuficiente\n");
                     continue;
                     }
+            // Run sequential
                 if (strcmp(args[1], "sequential") == 0){
                     for (int i = 2; i < argc_line; i++){
                         Task *task = encontrar_task(args[i]);
@@ -71,6 +74,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                             spawn(task);
                         }
                     }
+            // Run parallel
                 } if (strcmp(args[1], "parallel") == 0){
                     pid_t pids[64];
                     int n = 0;
@@ -87,10 +91,26 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                             waitpid(pids[i], NULL, 0);
                         }
                     }
+            // Run pipe
+                } if (strcmp(args[1], "pipe") == 0){
+                    Task *tasks[64];
+                    int n = 0;
+                    int deuErro = 0;
+                    for (int i = 2; i < argc_line; i++){
+                        Task *task = encontrar_task(args[i]);
+                        if (task == NULL){
+                            // Se não encontrou a task, aborta o pipe
+                            deuErro = 1;
+                            break;
+                        }
+                        tasks[n++] = task;
+                    }
+                    if (!deuErro){ // Só chama a função se não tiver dado problema
+                        run_pipe(tasks, n);
+                    }
                 }
             }
         }
-        
         return 0;
     }
 }
