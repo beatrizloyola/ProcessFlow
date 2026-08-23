@@ -79,32 +79,32 @@
 
 ## 🌑 Fase 8 — Background + jobs + wait
 
-- [ ] Definir struct `Job` com jobId, PID, nome da tarefa e status (running/done)
-- [ ] Implementar lista de jobs ativos
-- [ ] Implementar `start <tarefa>`: `fork()` sem `waitpid()`, registrar job, imprimir `[jobId] PID`
-- [ ] Implementar `jobs`: iterar lista e exibir jobs ainda ativos
-- [ ] Implementar `wait <jobId>`: buscar job por id, chamar `waitpid(pid)`, marcar como concluído
-- [ ] Job inexistente em `wait`: imprimir erro e continuar
-- [ ] Implementar coleta de zumbis: instalar handler de `SIGCHLD` com `waitpid(-1, WNOHANG)` em loop, atualizando status na lista de jobs
-- [ ] Testar `start`, `jobs`, `wait` e verificar ausência de processos zumbi
+- [X] Definir struct `Job` com jobId, PID, nome da tarefa e status (running/done)
+- [X] Implementar lista de jobs ativos
+- [X] Implementar `start <tarefa>`: `fork()` sem `waitpid()`, registrar job, imprimir `[jobId] PID`
+- [X] Implementar `jobs`: iterar lista e exibir jobs ainda ativos
+- [X] Implementar `wait <jobId>`: buscar job por id, chamar `waitpid(pid)`, marcar como concluído
+- [X] Job inexistente em `wait`: imprimir erro e continuar
+- [X] Implementar coleta de zumbis: instalar handler de `SIGCHLD` com `waitpid(-1, WNOHANG)` em loop, atualizando status na lista de jobs
+- [X] Testar `start`, `jobs`, `wait` e verificar ausência de processos zumbi
 
 ---
 
 ## ⚠️ Fase 9 — Revisão de erros e casos limite
 
-- [ ] Revisar todos os `fork()`/`exec()`/`pipe()`/`open()` com tratamento de erro
-- [ ] Garantir que processo filho com código de saída ≠ 0 não derruba o pai
-- [ ] Testar linha vazia, espaços múltiplos, CTRL-D e workflow sem `exit`
-- [ ] Testar argumentos inválidos ao iniciar (`./processflow a b c`)
+- [X] Revisar todos os `fork()`/`exec()`/`pipe()`/`open()` com tratamento de erro
+- [X] Garantir que processo filho com código de saída ≠ 0 não derruba o pai
+- [X] Testar linha vazia, espaços múltiplos, CTRL-D e workflow sem `exit`
+- [X] Testar argumentos inválidos ao iniciar (`./processflow a b c`)
 
 ---
 
 ## 🗂️ Fase 10 — Empacotamento e entrega
 
-- [ ] Criar `Makefile` com targets `all`, `clean` e `test`
-- [ ] Criar `README.md` com SO, arquivos, como compilar, executar e testar
-- [ ] Gravar sessão de testes: `script -a evidencias.log` → rodar todos os casos → `exit`
-- [ ] Fazer commits atômicos no GitHub (um por feature implementada)
+- [X] Criar `Makefile` com targets `all`, `clean` e `test`
+- [X] Criar `README.md` com SO, arquivos, como compilar, executar e testar
+- [X] Gravar sessão de testes: `script -a evidencias.log` → rodar todos os casos → `exit`
+- [X] Fazer commits atômicos no GitHub (um por feature implementada)
 - [ ] Escrever relatório PDF seguindo o Guia (seções 1–10)
 - [ ] Montar diretório `iniciais/` com tudo, compactar: `tar -cf iniciais.tar iniciais/`
 - [ ] Submeter no Google Classroom

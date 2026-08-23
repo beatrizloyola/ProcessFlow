@@ -429,4 +429,18 @@ processflow>
 [?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow
 [?2004lprocessflow> ^C
 [?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow testeNoe[KExit.pf
-[?2004ltask listar /bin/ls[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processo
+[?2004ltask listar /bin/ls[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow testeNoExit.pf[K
+[?2004lprocessflow> task falha /bin/ls /caminho/que/nao/existe
+run sequential falhaprocessflow>                     
+processflow> ^[[A    task falha /i bin/ls caminho/        /caminho/que/nao/exit ste
+processflow> run r sequential
+Quantidade de argumentos insuficiente
+processflow> run e sequential alh   falha
+/bin/ls: cannot access '/caminho/que/nao/existe': No such file or directory
+processflow> ^C
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ kill
+[?2004lkill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ exit
+[?2004lexit
+
+Script done on 2026-08-23 20:14:35-03:00 [COMMAND_EXIT_CODE="2"]
