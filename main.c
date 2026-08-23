@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                     fprintf(stderr, "Quantidade de argumentos insuficiente\n");
                     continue;
                     }
-            // Run sequential
+                // Run sequential
                 if (strcmp(args[1], "sequential") == 0){
                     for (int i = 2; i < argc_line; i++){
                         Task *task = encontrar_task(args[i]);
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                             spawn(task);
                         }
                     }
-            // Run parallel
+                // Run parallel
                 } if (strcmp(args[1], "parallel") == 0){
                     pid_t pids[64];
                     int n = 0;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                             waitpid(pids[i], NULL, 0);
                         }
                     }
-            // Run pipe
+                // Run pipe
                 } if (strcmp(args[1], "pipe") == 0){
                     Task *tasks[64];
                     int n = 0;
@@ -109,8 +109,38 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
                         run_pipe(tasks, n);
                     }
                 }
+            } else if (strcmp(args[0], "input") == 0){
+                if (argc_line < 3){
+                    fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                    continue;
+                }
+
+                Task *task = encontrar_task(args[1]);
+                if (task != NULL){
+                    task->input_file = strdup(args[2]);
+                }
+            } else if (strcmp(args[0], "output") == 0){
+                if (argc_line < 3){
+                    fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                    continue;
+                }
+
+                Task *task = encontrar_task(args[1]);
+                if (task != NULL){
+                    task->output_file = strdup(args[2]);
+                }
+            } else if (strcmp(args[0], "append") == 0){
+                if (argc_line < 3){
+                    fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                    continue;
+                }
+
+                Task *task = encontrar_task(args[1]);
+                if (task != NULL){
+                    task->append_file = strdup(args[2]);
+                }
             }
         }
-        return 0;
+    return 0;
     }
 }
