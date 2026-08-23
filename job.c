@@ -1,6 +1,8 @@
 #include "job.h"
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
+#include <sys/wait.h>
 
 static Job jobs[64]; // static restringe a visibilidade ao próprio arquivo
 static int contador_jobs = 0;
@@ -46,5 +48,14 @@ void marcar_job_concluido(pid_t pid){
             jobs[i].status = 1;
             return;
         }
+    }
+}
+
+void sigchld_handler(int sig) {
+    (void)sig; // Diz pro sistema que eu sei que não tô usando a variável na função
+    pid_t pid;
+    int status;
+    while ((pid = waitpid(-1, &status, WNOHANG)) > 0) { // Qualquer filho, não bloqueia
+        marcar_job_concluido(pid);
     }
 }

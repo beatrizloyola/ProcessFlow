@@ -14,5 +14,6 @@ int criar_job(pid_t pid, char *nome_task);
 Job *encontrar_job(int job_id);
 void listar_jobs_ativos(void);
 void marcar_job_concluido(pid_t pid);
+void sigchld_handler(int sig);
 
 #endif
