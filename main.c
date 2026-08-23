@@ -121,6 +121,14 @@ static void processar_linha (char *buf){
             if (task != NULL){
                 task->append_file = strdup(args[2]);
             }
+        } else if (strcmp(args[0], "workdir") == 0){
+            if (argc_line < 2){
+                fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                return;
+            }
+            if (chdir(args[1]) == -1){ // Muda o diretório de trabalho do processo
+                perror("workdir"); // Imprime mensagem de erro do sistema
+            }
         }
 }
 

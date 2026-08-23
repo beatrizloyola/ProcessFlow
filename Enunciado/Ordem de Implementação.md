@@ -67,13 +67,13 @@
 
 ## 📜 Fase 7 — workflowFile + workdir
 
-- [ ] Implementar leitura de arquivo `.pf`: abrir, ler linha a linha, imprimir cada linha antes de processar
-- [ ] Reusar o mesmo dispatcher de comandos do modo interativo
-- [ ] Encerrar ao ler `exit` ou ao chegar no EOF do arquivo
-- [ ] Erro ao abrir arquivo `.pf`: imprimir mensagem e encerrar o programa
-- [ ] Implementar `workdir <diretório>`: chamar `chdir()` e atualizar variável de diretório atual
-- [ ] Diretório inexistente em `workdir`: imprimir erro com `perror()` e continuar
-- [ ] Testar modo workflow com arquivo `.pf` completo incluindo `workdir`
+- [X] Implementar leitura de arquivo `.pf`: abrir, ler linha a linha, imprimir cada linha antes de processar
+- [X] Reusar o mesmo dispatcher de comandos do modo interativo
+- [X] Encerrar ao ler `exit` ou ao chegar no EOF do arquivo
+- [X] Erro ao abrir arquivo `.pf`: imprimir mensagem e encerrar o programa
+- [X] Implementar `workdir <diretório>`: chamar `chdir()` e atualizar variável de diretório atual
+- [X] Diretório inexistente em `workdir`: imprimir erro com `perror()` e continuar
+- [X] Testar modo workflow com arquivo `.pf` completo incluindo `workdir`
 
 ---
 
