@@ -44,13 +44,21 @@ static void processar_linha (char *buf){
 
         // Run
         } else if (strcmp(args[0], "run") == 0) {
-            if (argc_line < 3){
+            if (argc_line < 2){
                 fprintf(stderr, "Quantidade de argumentos insuficiente\n");
                 return;
                 }
+
+            int inicio;
+
+            if (strcmp(args[1], "sequential") == 0 || strcmp(args[1], "parallel") == 0 || strcmp(args[1], "pipe") == 0){
+                inicio = 2; // Modo explícito, tarefas começam em args[2]
+            } else {
+                inicio = 1; // Modo implícito, tarefas começam em args[1]
+            }
             // Run sequential
             if (strcmp(args[1], "sequential") == 0){
-                for (int i = 2; i < argc_line; i++){
+                for (int i = inicio; i < argc_line; i++){
                     Task *task = encontrar_task(args[i]);
                     if (task == NULL){
                         continue;
@@ -59,10 +67,10 @@ static void processar_linha (char *buf){
                     }
                 }
             // Run parallel
-            } if (strcmp(args[1], "parallel") == 0){
+            } else if (strcmp(args[1], "parallel") == 0){
                 pid_t pids[64];
                 int n = 0;
-                for (int i = 2; i < argc_line; i++){ // Cria todos os filhos sem esperar o anterior terminar
+                for (int i = inicio; i < argc_line; i++){ // Cria todos os filhos sem esperar o anterior terminar
                     Task *task = encontrar_task(args[i]);
                     if (task == NULL){
                         continue;
@@ -76,11 +84,11 @@ static void processar_linha (char *buf){
                     }
                 }
             // Run pipe
-            } if (strcmp(args[1], "pipe") == 0){
+            } else if (strcmp(args[1], "pipe") == 0){
                 Task *tasks[64];
                 int n = 0;
                 int deuErro = 0;
-                for (int i = 2; i < argc_line; i++){
+                for (int i = inicio; i < argc_line; i++){
                     Task *task = encontrar_task(args[i]);
                     if (task == NULL){
                         // Se não encontrou a task, aborta o pipe
@@ -91,6 +99,15 @@ static void processar_linha (char *buf){
                 }
                 if (!deuErro){ // Só chama a função se não tiver dado problema
                     run_pipe(tasks, n);
+                }
+            } else {
+                for (int i = inicio; i < argc_line; i++){
+                    Task *task = encontrar_task(args[i]);
+                    if (task == NULL){
+                        continue;
+                    } else {
+                        spawn(task);
+                    }
                 }
             }
         // Input
