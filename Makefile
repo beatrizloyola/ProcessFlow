@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
-SRCS = main.c task.c exec.c
+SRCS = main.c task.c exec.c job.c
 TARGET = processflow
 
 all: $(TARGET)
