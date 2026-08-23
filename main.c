@@ -203,6 +203,7 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
         char buf[4096];
         while (fgets(buf, sizeof(buf), f) != NULL){
             printf("%s", buf); // imprime a linha antes de processar
+            fflush(stdout);
             processar_linha(buf);
         }
         fclose(f);
