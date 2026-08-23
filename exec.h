@@ -5,5 +5,6 @@
 
 void spawn(Task *t);
 pid_t spawn_async(Task *t);
+void run_pipe(Task *tasks[], int n);
 
 #endif
