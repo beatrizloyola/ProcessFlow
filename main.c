@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include "task.h"
 #include "exec.h"
+#include "job.h"
 
 static void processar_linha (char *buf){
     // Limpar o \n do final do buffer
@@ -91,6 +92,7 @@ static void processar_linha (char *buf){
                     run_pipe(tasks, n);
                 }
             }
+        // Input
         } else if (strcmp(args[0], "input") == 0){
             if (argc_line < 3){
                 fprintf(stderr, "Quantidade de argumentos insuficiente\n");
@@ -101,6 +103,7 @@ static void processar_linha (char *buf){
             if (task != NULL){
                 task->input_file = strdup(args[2]);
             }
+        // Output
         } else if (strcmp(args[0], "output") == 0){
             if (argc_line < 3){
                 fprintf(stderr, "Quantidade de argumentos insuficiente\n");
@@ -111,6 +114,7 @@ static void processar_linha (char *buf){
             if (task != NULL){
                 task->output_file = strdup(args[2]);
             }
+        // Append
         } else if (strcmp(args[0], "append") == 0){
             if (argc_line < 3){
                 fprintf(stderr, "Quantidade de argumentos insuficiente\n");
@@ -121,6 +125,7 @@ static void processar_linha (char *buf){
             if (task != NULL){
                 task->append_file = strdup(args[2]);
             }
+        // Workdir
         } else if (strcmp(args[0], "workdir") == 0){
             if (argc_line < 2){
                 fprintf(stderr, "Quantidade de argumentos insuficiente\n");
@@ -129,6 +134,39 @@ static void processar_linha (char *buf){
             if (chdir(args[1]) == -1){ // Muda o diretório de trabalho do processo
                 perror("workdir"); // Imprime mensagem de erro do sistema
             }
+        // Start
+        } else if (strcmp(args[0], "start") == 0){
+            if (argc_line < 2){
+                fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                return;
+            }
+
+            Task *task = encontrar_task(args[1]);
+            if (task == NULL){
+                return;
+            }
+
+            pid_t pid = spawn_async(task);
+            int id = criar_job(pid, args[1]);
+            printf("[%d] %d\n", id, pid);
+        // Jobs
+        } else if (strcmp(args[0], "jobs") == 0){
+            listar_jobs_ativos();
+        // Wait
+        } else if (strcmp(args[0], "wait") == 0){
+            if (argc_line < 2){
+                fprintf(stderr, "Quantidade de argumentos insuficiente\n");
+                return;
+            }
+            int id = atoi(args[1]); // Converte string em int
+            // Como retorna 0 se der erro e os ids começam em 1, nunca vai achar o job de id inválido
+            Job *job = encontrar_job(id);
+            if (job == NULL){
+                return; // Erro já impresso por encontrar_job
+            }
+
+            waitpid(job->pid, NULL, 0);
+            marcar_job_concluido(job->pid);
         }
 }
 

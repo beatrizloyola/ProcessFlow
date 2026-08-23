@@ -307,4 +307,63 @@ processflow> run r sequential listar
  Enunciado	 exec.c		  main	   Makefile   README.md     task.c
 processflow> exit\
 processflow> exit
-[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make[K[K[K[K./processflow[6Pecho $?./processflow nao_existe.pfecho $?[K./processflow
+[?2004lprocessflow> workd  kdir tm  /tmp
+processflow> tasl k listar /bin/ls
+processflow> run r sequential listar
+claude-1000
+cpptools
+gdm3-config-err-5nGumU
+hsperfdata_loyola
+pyright-14268-1SszQGa3jL72
+python-languageserver-cancellation
+snap-private-tmp
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-bluetooth.service-xAmjQ3
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-colord.service-x5Zg89
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-ModemManager.service-NUMKsX
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-polkit.service-xEeId4
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-power-profiles-daemon.service-tMmIpC
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-switcheroo-control.service-hvfngq
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-systemd-logind.service-FEKAZa
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-systemd-oomd.service-bJ39Rn
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-systemd-resolved.service-lm2ZHV
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-systemd-timesyncd.service-hy4305
+systemd-private-31e1d7dda3414c33acf66db4311ecb72-upower.service-tbWZV1
+processflow> workdir /caminho/n inexistente/
+workdir: No such file or directory
+processflow> exit
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ ./processflow a b c
+[?2004lErro: Argumentos demais!
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[01m[Kmain.c:[m[K In function ‘[01m[Kprocessar_linha[m[K’:
+[01m[Kmain.c:156:20:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function ‘[01m[KStrcmp[m[K’; did you mean ‘[01m[Kstrcmp[m[K’? [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-function-declaration-Wimplicit-function-declaration]8;;[m[K]
+  156 |         } else if ([01;35m[KStrcmp[m[K(args[0], "wait")){
+      |                    [01;35m[K^~~~~~[m[K
+      |                    [32m[Kstrcmp[m[K
+/usr/bin/ld: /tmp/ccOgA9EF.o: in function `processar_linha':
+/home/loyola/Documents/orquestrador-de-processos/main.c:156:(.text+0x771): undefined reference to `Strcmp'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:9: processflow] Error 1
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ [K]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ make./processflow a b c[K[K[K[K[K[K
+[?2004lprocessflow> task longa sleep 10
+processflow> start longa
+[1] 40518
+processflow> jobs
+Quantidade de argumentos insuficiente
+processflow> exit
+[?2004h]0;loyola@loyola-dell-g15: ~/Documents/orquestrador-de-processos[01;32mloyola@loyola-dell-g15[00m:[01;34m~/Documents/orquestrador-de-processos[00m$ 1[K./processflowmake[K
+[?2004lgcc -Wall -Wextra -g main.c task.c exec.c job.c -o processflow
+[01m[Kmain.c:[m[K In function ‘[01m[Kprocessar_linha[m[K’:
+[01m[Kmain.c:153:43:[m[K [01;35m[Kwarning: [m[Kpassing argument 2 of ‘[01m[Kstrcmp[m[K’ makes pointer from integer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  153 |         } else if (strcmp(args[0], [01;35m[K"jobs" == 0[m[K)){
+      |                                    [01;35m[K~~~~~~~^~~~[m[K
+      |                                           [01;35m[K|[m[K
+      |                                           [01;35m[Kint[m[K
+In file included from [01m[Kmain.c:3[m[K:
+[01m[K/usr/include/string.h:156:50:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kconst char *[m[K’ but argument is of type ‘[01m[Kint[m[K’
+  156 | extern int strcmp (const char *__s1, [01;36
