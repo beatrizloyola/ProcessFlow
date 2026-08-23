@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include "task.h"
 #include "exec.h"
 
@@ -16,6 +17,41 @@ void spawn(Task *t){
         fprintf(stderr, "Erro no fork\n");
         return;
     } else if (pid == 0) { // Só o filho pode executar esse bloco
+        // Input
+        if (t->input_file != NULL){
+            int fd = open(t->input_file, O_RDONLY); // Abre o arquivo no modo de leitura
+            if (fd == -1){
+                fprintf(stderr, "Erro ao abrir o arquivo de entrada\n");
+                exit(1);
+            }
+            dup2(fd, STDIN_FILENO); // Copia o descritor
+            close(fd); // Fecha o arquivo
+        }
+
+        // Output
+        if (t->output_file != NULL){
+            int fd = open(t->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            // Abre em modo de escrita, cria se não existir, trunca (limpra preenchendo com 0), permissões
+            if (fd == -1){
+                fprintf(stderr, "Erro ao abrir o arquivo de saída\n");
+                exit(1);
+            }
+            dup2(fd, STDOUT_FILENO); // Copia o descritor
+            close(fd); // Fecha o arquivo
+        }
+
+        // Append
+        if (t->append_file != NULL){
+            int fd = open(t->append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+            // Abre em modo de escrita, cria se não existir, escreve no fim, permissões
+            if (fd == -1){
+                fprintf(stderr, "Erro ao abrir o arquivo de append\n");
+                exit(1);
+            }
+            dup2(fd, STDOUT_FILENO); // Copia o descritor
+            close(fd); // Fecha o arquivo
+        }
+
         if(execvp(t->programa, t->argumentos) == -1){ // Susbtitui a imagem do processo filho pelo programa
             fprintf(stderr, "Erro ao executar o programa\n");
             exit(1); // Mata o filho pra evitar processo zumbi

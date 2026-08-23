@@ -56,12 +56,12 @@
 
 ## 📂 Fase 6 — Redirecionamento
 
-- [ ] Criar campos `input_file`, `output_file`, `append_file` na struct `Task`
-- [ ] Implementar comando `input <tarefa> <arquivo>`: salva caminho na struct
-- [ ] Implementar comando `output <tarefa> <arquivo>`: salva caminho na struct (modo truncar)
-- [ ] Implementar comando `append <tarefa> <arquivo>`: salva caminho na struct (modo append)
-- [ ] Na função `spawn()`, antes do `exec()`: abrir arquivo e `dup2()` para STDIN/STDOUT se definido
-- [ ] Erro ao abrir arquivo: imprimir mensagem no filho e `exit(1)` (pai captura via `waitpid`)
+- [X] Criar campos `input_file`, `output_file`, `append_file` na struct `Task`
+- [X] Implementar comando `input <tarefa> <arquivo>`: salva caminho na struct
+- [X] Implementar comando `output <tarefa> <arquivo>`: salva caminho na struct (modo truncar)
+- [X] Implementar comando `append <tarefa> <arquivo>`: salva caminho na struct (modo append)
+- [X] Na função `spawn()`, antes do `exec()`: abrir arquivo e `dup2()` para STDIN/STDOUT se definido
+- [X] Erro ao abrir arquivo: imprimir mensagem no filho e `exit(1)` (pai captura via `waitpid`)
 
 ---
 
