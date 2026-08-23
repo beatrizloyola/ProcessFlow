@@ -129,11 +129,19 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
     if (argc > 2){
         fprintf(stderr, "Erro: Argumentos demais!\n");
         return -1;
-    } else if (argc == 2){
-        // Modo workflow
-        // argv[1] é o caminho do arquivo .pf
-    } else {
-        // Modo interativo
+    } else if (argc == 2){ // Modo workflow
+        FILE *f = fopen(argv[1], "r");
+        if (f == NULL){
+            fprintf(stderr, "Erro ao abrir o arquivo workflow\n");
+            return 1;
+        }
+        char buf[4096];
+        while (fgets(buf, sizeof(buf), f) != NULL){
+            printf("%s", buf); // imprime a linha antes de processar
+            processar_linha(buf);
+        }
+        fclose(f);
+    } else { // Modo interativo
         char buf[4096] = "";
         while (1) {
             printf("processflow> ");
