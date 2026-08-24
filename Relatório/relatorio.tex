@@ -40,8 +40,7 @@ capaz de cadastrar tarefas (\texttt{task}) e executá-las por meio de processos 
 tarefas, redirecionamento de entrada/saída (\texttt{input}/\texttt{output}/\texttt{append}), troca de
 diretório de trabalho (\texttt{workdir}), execução em background com controle de jobs
 (\texttt{start}/\texttt{jobs}/\texttt{wait}) e dois modos de operação: interativo (prompt
-\texttt{processflow>}) e workflow (leitura de um arquivo \texttt{.pf}). Todos os itens do enunciado
-foram implementados e validados com os testes oficiais fornecidos pelo professor.
+\texttt{processflow>}) e workflow (leitura de um arquivo \texttt{.pf}).
 
 \section{Checklist de Requisitos}
 
@@ -140,49 +139,52 @@ S7 & Background via \texttt{spawn\_async()} + \texttt{SIGCHLD} & \texttt{start} 
 
 \subsection{Diário de Tentativas}
 
-\begin{longtable}{L{0.5cm} L{1.1cm} L{4.5cm} L{2.7cm} L{7.5cm}}
+\begin{longtable}{L{0.5cm} L{2.6cm} L{1.1cm} L{3.4cm} L{2.3cm} L{6.2cm}}
 \toprule
-\textbf{\#} & \textbf{Estrat.} & \textbf{O que tentei} & \textbf{Resultado} & \textbf{Hipótese/\allowbreak Causa (se falhou)} \\
+\textbf{\#} & \textbf{Quando} & \textbf{Estrat.} & \textbf{O que tentei} & \textbf{Resultado} & \textbf{Hipótese/\allowbreak Causa (se falhou)} \\
 \midrule
 \endhead
-1 & S1 & Loop interativo com \texttt{fgets} + prompt \texttt{processflow>} & OK & --- \\
-2 & S1 & Tokenização com \texttt{strtok}, guardando ponteiros em \texttt{args[64]} & Falha parcial $\to$ corrigida & \texttt{strcpy(args[i], token)} em ponteiro não inicializado; corrigido para atribuição direta do ponteiro. \\
-3 & S2 & Struct \texttt{Task} com \texttt{char *argumentos[64]} & Falha parcial $\to$ corrigida & Array de tamanho flexível na struct sem alocação manual; trocado para tamanho fixo. \\
-4 & S2 & \texttt{criar\_task()} copiando dados para a struct & Falha parcial $\to$ corrigida & \texttt{strcpy} em ponteiros não alocados (trocado por \texttt{strdup}); índice sempre 0 por uso de \texttt{->} em array (corrigido para indexação explícita). \\
-5 & S2 & \texttt{encontrar\_task()} por nome & Falha parcial $\to$ corrigida & \texttt{strcmp} comparando string com struct; retorno por valor em função que devia retornar \texttt{Task*}. \\
-6 & S2 & \texttt{spawn()}: fork+execvp+waitpid & Falha parcial $\to$ corrigida & Faltava \texttt{exit(1)} no filho após \texttt{execvp} falhar, duplicando o loop do pai. \\
-7 & S1/S2 & Teste ponta a ponta: \texttt{task listar} + \texttt{run sequential} & OK & --- \\
-8 & S2 & Testes de erro (tarefa/programa inexistente, args insuficientes) & OK & --- \\
-9 & S2 & Makefile (\texttt{all}/\texttt{clean}, \texttt{-Wall -Wextra}) & OK & --- \\
-10 & S1 & \texttt{run sequential} generalizado para N tarefas & Falha parcial $\to$ corrigida & Loop usava \texttt{args[2]} fixo em vez de \texttt{args[i]}. \\
-11 & S2 & \texttt{run parallel} via \texttt{spawn\_async()} & Falha parcial $\to$ corrigida & \texttt{return;} em função \texttt{pid\_t} sem valor; \texttt{waitpid} chamado com \texttt{pids[i]==-1} bagunçando espera de outros filhos. \\
-12 & S2 & Paralelismo real (\texttt{sleep 2}/\texttt{sleep 1}) & OK & --- \\
-13 & S3 & Primeira versão de \texttt{run\_pipe()} & Falha parcial $\to$ corrigida & \texttt{if (pids[i == 0])} com parênteses trocados; \texttt{else if} impedia os dois \texttt{dup2} nos processos do meio. \\
-14 & S3/S5 & Teste \texttt{run pipe listar ordenar contar} + ligação no dispatcher & OK & --- \\
-15 & S4 & Campos \texttt{input\_file}/\texttt{output\_file}/\texttt{append\_file} + comandos & Falha parcial $\to$ corrigida & Checagem errada de \texttt{args[1]} em vez de \texttt{args[0]}, com loop desnecessário; reescrito sem loop. \\
-16 & S4 & \texttt{spawn()}: \texttt{open()} + \texttt{dup2} antes do \texttt{execvp} & OK & --- \\
-17 & S4 & Teste \texttt{input}/\texttt{output}/\texttt{append} & OK & --- \\
-18 & S5 & Extração para \texttt{processar\_linha()} & Falha parcial $\to$ corrigida & \texttt{continue} de loops internos (sequential/parallel) virou \texttt{return}, abortando a função inteira; revertido. \\
-19 & --- & Chaves desbalanceadas em \texttt{main.c} & Falha $\to$ corrigida & Faltava fechar \texttt{main}; depois \texttt{return 0;} preso dentro do \texttt{while(1)}. \\
-20 & S5 & Modo workflow (\texttt{argc==2}) & OK (após recompilar) & --- \\
-21 & S5 & \texttt{workdir <dir>} com \texttt{chdir()} & OK & --- \\
-22 & S6 & \texttt{criar\_job()} em \texttt{job.c} & Falha parcial $\to$ corrigida & Incremento do contador antes de usar como índice causava overflow do array. \\
-23 & S6 & Retorno do \texttt{job\_id} criado & Falha parcial $\to$ corrigida & Leitura após incrementar contador, apontando para slot não inicializado. \\
-24 & S6 & \texttt{marcar\_job\_concluido(pid\_t pid)} & Falha parcial $\to$ corrigida & Reaproveitou busca por \texttt{job\_id} passando \texttt{pid}; corrigido com busca dedicada por \texttt{pid}. \\
-25 & S6 & \texttt{listar\_jobs()} antiga & Código morto removido & \texttt{status\_str} não inicializado seguido de \texttt{strcpy}. \\
-26 & S7 & Ligação \texttt{start}/\texttt{jobs}/\texttt{wait} no dispatcher & Falha parcial $\to$ corrigida & \texttt{strcmp(args[0], "jobs")} sem \texttt{==0}. \\
-27 & S7 & Teste \texttt{start} com programa inexistente & Comportamento correto & Job criado no \texttt{fork()} antes de saber se \texttt{execvp} funciona --- assíncrono, esperado. \\
-28 & S7 & \texttt{sigchld\_handler()} com \texttt{waitpid(-1,\&status,WNOHANG)} & OK & --- \\
-29 & --- & Revisão de erros: \texttt{run\_pipe()} sem aviso de falha de \texttt{fork()} & Falha parcial $\to$ corrigida & \texttt{return;} no meio do loop abandonava filhos já criados; corrigido para só avisar e seguir. \\
-30 & --- & Casos-limite: linha vazia, espaços múltiplos, CTRL-D, workflow sem \texttt{exit}, args inválidos, exit code $\neq$0 & OK & --- \\
-31 & --- & Testes oficiais \texttt{teste1}/\texttt{teste2}/\texttt{teste3} & Falha $\to$ corrigida & \texttt{teste3} usa \texttt{run escrever} sem keyword; dispatcher exigia \texttt{argc\_line>=3}. Corrigido com caso implícito (sequencial por padrão). \\
-32 & --- & \texttt{diff} da saída do \texttt{teste3} vs. esperado & Falha parcial $\to$ corrigida & \texttt{stdout} do pai fully-buffered ao redirecionar para arquivo, saída dos filhos saía antes do eco das linhas; corrigido com \texttt{fflush(stdout)} após cada \texttt{printf} de eco. \\
-33 & --- & Comparação de \texttt{teste1}/\texttt{teste2} & Falha aparente, não era bug & Esses testes usam \texttt{stdin} redirecionado (modo interativo), não \texttt{.pf}; validado com \texttt{./processflow < entrada.txt}, saída bateu 100\%. \\
+1 & 19/08\allowbreak\ (16:07--18:21) & S1 & Loop interativo com \texttt{fgets} + prompt \texttt{processflow>} & OK & --- \\
+2 & 19/08\allowbreak\ (16:07--18:21) & S1 & Tokenização com \texttt{strtok}, guardando ponteiros em \texttt{args[64]} & Falha parcial $\to$ corrigida & \texttt{strcpy(args[i], token)} em ponteiro não inicializado; corrigido para atribuição direta do ponteiro. \\
+3 & 19/08\allowbreak\ (16:07--18:21) & S2 & Struct \texttt{Task} com \texttt{char *argumentos[64]} & Falha parcial $\to$ corrigida & Array de tamanho flexível na struct sem alocação manual; trocado para tamanho fixo. \\
+4 & 19/08\allowbreak\ (16:07--18:21) & S2 & \texttt{criar\_task()} copiando dados para a struct & Falha parcial $\to$ corrigida & \texttt{strcpy} em ponteiros não alocados (trocado por \texttt{strdup}); índice sempre 0 por uso de \texttt{->} em array (corrigido para indexação explícita). \\
+5 & 19/08\allowbreak\ (16:07--18:21) & S2 & \texttt{encontrar\_task()} por nome & Falha parcial $\to$ corrigida & \texttt{strcmp} comparando string com struct; retorno por valor em função que devia retornar \texttt{Task*}. \\
+6 & 19/08\allowbreak\ (16:07--18:21) & S2 & \texttt{spawn()}: fork+execvp+waitpid & Falha parcial $\to$ corrigida & Faltava \texttt{exit(1)} no filho após \texttt{execvp} falhar, duplicando o loop do pai. \\
+7 & 19/08\allowbreak\ (16:07--18:21) & S1/S2 & Teste ponta a ponta: \texttt{task listar} + \texttt{run sequential} & OK & --- \\
+8 & 19/08\allowbreak\ (16:07--18:21) & S2 & Testes de erro (tarefa/programa inexistente, args insuficientes) & OK & --- \\
+9 & 19/08\allowbreak\ (16:07--18:21) & S2 & Makefile (\texttt{all}/\texttt{clean}, \texttt{-Wall -Wextra}) & OK & --- \\
+10 & 19/08\allowbreak\ (16:07--18:21) & S1 & \texttt{run sequential} generalizado para N tarefas & Falha parcial $\to$ corrigida & Loop usava \texttt{args[2]} fixo em vez de \texttt{args[i]}. \\
+11 & 19/08\allowbreak\ (16:07--18:21) & S2 & \texttt{run parallel} via \texttt{spawn\_async()} & Falha parcial $\to$ corrigida & \texttt{return;} em função \texttt{pid\_t} sem valor; \texttt{waitpid} chamado com \texttt{pids[i]==-1} bagunçando espera de outros filhos. \\
+12 & 19/08\allowbreak\ (16:07--18:21) & S2 & Paralelismo real (\texttt{sleep 2}/\texttt{sleep 1}) & OK & --- \\
+13 & 23/08\allowbreak\ (13:30--20:14) & S3 & Primeira versão de \texttt{run\_pipe()} & Falha parcial $\to$ corrigida & \texttt{if (pids[i == 0])} com parênteses trocados; \texttt{else if} impedia os dois \texttt{dup2} nos processos do meio. \\
+14 & 23/08\allowbreak\ (13:30--20:14) & S3/S5 & Teste \texttt{run pipe listar ordenar contar} + ligação no dispatcher & OK & --- \\
+15 & 23/08\allowbreak\ (13:30--20:14) & S4 & Campos \texttt{input\_file}/\texttt{output\_file}/\texttt{append\_file} + comandos & Falha parcial $\to$ corrigida & Checagem errada de \texttt{args[1]} em vez de \texttt{args[0]}, com loop desnecessário; reescrito sem loop. \\
+16 & 23/08\allowbreak\ (13:30--20:14) & S4 & \texttt{spawn()}: \texttt{open()} + \texttt{dup2} antes do \texttt{execvp} & OK & --- \\
+17 & 23/08\allowbreak\ (13:30--20:14) & S4 & Teste \texttt{input}/\texttt{output}/\texttt{append} & OK & --- \\
+18 & 23/08\allowbreak\ (13:30--20:14) & S5 & Extração para \texttt{processar\_linha()} & Falha parcial $\to$ corrigida & \texttt{continue} de loops internos (sequential/parallel) virou \texttt{return}, abortando a função inteira; revertido. \\
+19 & 23/08\allowbreak\ (13:30--20:14) & --- & Chaves desbalanceadas em \texttt{main.c} & Falha $\to$ corrigida & Faltava fechar \texttt{main}; depois \texttt{return 0;} preso dentro do \texttt{while(1)}. \\
+20 & 23/08\allowbreak\ (13:30--20:14) & S5 & Modo workflow (\texttt{argc==2}) & OK (após recompilar) & --- \\
+21 & 23/08\allowbreak\ (13:30--20:14) & S5 & \texttt{workdir <dir>} com \texttt{chdir()} & OK & --- \\
+22 & 23/08\allowbreak\ (13:30--20:14) & S6 & \texttt{criar\_job()} em \texttt{job.c} & Falha parcial $\to$ corrigida & Incremento do contador antes de usar como índice causava overflow do array. \\
+23 & 23/08\allowbreak\ (13:30--20:14) & S6 & Retorno do \texttt{job\_id} criado & Falha parcial $\to$ corrigida & Leitura após incrementar contador, apontando para slot não inicializado. \\
+24 & 23/08\allowbreak\ (13:30--20:14) & S6 & \texttt{marcar\_job\_concluido(pid\_t pid)} & Falha parcial $\to$ corrigida & Reaproveitou busca por \texttt{job\_id} passando \texttt{pid}; corrigido com busca dedicada por \texttt{pid}. \\
+25 & 23/08\allowbreak\ (13:30--20:14) & S6 & \texttt{listar\_jobs()} antiga & Código morto removido & \texttt{status\_str} não inicializado seguido de \texttt{strcpy}. \\
+26 & 23/08\allowbreak\ (13:30--20:14) & S7 & Ligação \texttt{start}/\texttt{jobs}/\texttt{wait} no dispatcher & Falha parcial $\to$ corrigida & \texttt{strcmp(args[0], "jobs")} sem \texttt{==0}. \\
+27 & 23/08\allowbreak\ (13:30--20:14) & S7 & Teste \texttt{start} com programa inexistente & Comportamento correto & Job criado no \texttt{fork()} antes de saber se \texttt{execvp} funciona --- assíncrono, esperado. \\
+28 & 23/08\allowbreak\ (13:30--20:14) & S7 & \texttt{sigchld\_handler()} com \texttt{waitpid(-1,\allowbreak\&status,\allowbreak WNOHANG)} & OK & --- \\
+29 & 23/08\allowbreak\ (13:30--20:14) & --- & Revisão de erros: \texttt{run\_pipe()} sem aviso de falha de \texttt{fork()} & Falha parcial $\to$ corrigida & \texttt{return;} no meio do loop abandonava filhos já criados; corrigido para só avisar e seguir. \\
+30 & 23/08\allowbreak\ (13:30--20:14) & --- & Casos-limite: linha vazia, espaços múltiplos, CTRL-D, workflow sem \texttt{exit}, args inválidos, exit code $\neq$0 & OK & --- \\
+31 & 23/08\allowbreak\ (13:30--20:14) & --- & Testes oficiais \texttt{teste1}/\texttt{teste2}/\texttt{teste3} & Falha $\to$ corrigida & \texttt{teste3} usa \texttt{run escrever} sem keyword; dispatcher exigia \texttt{argc\_line>=3}. Corrigido com caso implícito (sequencial por padrão). \\
+32 & 23/08\allowbreak\ (13:30--20:14) & --- & \texttt{diff} da saída do \texttt{teste3} vs. esperado & Falha parcial $\to$ corrigida & \texttt{stdout} do pai fully-buffered ao redirecionar para arquivo, saída dos filhos saía antes do eco das linhas; corrigido com \texttt{fflush(stdout)} após cada \texttt{printf} de eco. \\
+33 & 23/08\allowbreak\ (13:30--20:14) & --- & Comparação de \texttt{teste1}/\texttt{teste2} & Falha aparente, não era bug & Esses testes usam \texttt{stdin} redirecionado (modo interativo), não \texttt{.pf}; validado com \texttt{./processflow < entrada.txt}, saída bateu 100\%. \\
 \bottomrule
 \end{longtable}
 
-\textit{Nota: as colunas "Quando" e "Evidência" foram omitidas da tabela --- todas as tentativas têm como evidência o arquivo \texttt{evidencias.log} (gerado com \texttt{script -a evidencias.log}), que
-registra em ordem cronológica os comandos e saídas de toda a sessão de desenvolvimento.}
+\textit{Nota: a coluna "Quando" indica a data (dia/mês) em que cada tentativa foi feita, com base nos
+timestamps de \texttt{Script started}/\texttt{Script done} e nos comandos registrados em
+\texttt{evidencias.log} (gerado com \texttt{script -a evidencias.log}). A coluna "Evidência" foi omitida ---
+todas as tentativas têm como evidência esse mesmo arquivo, que registra em ordem cronológica os comandos e
+saídas de toda a sessão de desenvolvimento.}
 
 \section{Evidências}
 
