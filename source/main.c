@@ -210,8 +210,8 @@ int main(int argc, char *argv[]){ // argc é a quantidade de argumentos, argv é
     } else { // Modo interativo
         char buf[4096] = "";
         while (1) {
-            printf("processflow> ");
-            fflush(stdout);
+            fprintf(stderr, "processflow> ");
+            fflush(stderr);
             if (fgets(buf, sizeof(buf), stdin) == NULL){
                 printf("\n");
                 break;
